@@ -1,0 +1,23 @@
+<h1 class="titulo">ESTUDIANTES NOVATEC</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Correo</th>
+      <th>Especialidad</th>
+      <th>Fecha Contrato</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estudiante of estudiantes">
+      <td>{{ estudiante.nombre }}</td>
+      <td>{{ estudiante.edad }}</td>
+      <td>{{ estudiante.correo }}</td>
+      <td>{{ estudiante.carrera }}</td>
+      <td>{{ estudiante.promedio }}</td>
+      <td><button class="delete-button" (click)="delete(estudiante.id)"><i class="fas fa-trash"></i></button></td>
+    </tr>
+  </tbody>
+</table>
