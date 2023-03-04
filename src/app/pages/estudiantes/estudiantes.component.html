@@ -17,7 +17,10 @@
       <td>{{ estudiante.correo }}</td>
       <td>{{ estudiante.carrera }}</td>
       <td>{{ estudiante.promedio }}</td>
-      <td><button class="delete-button" (click)="delete(estudiante.id)"><i class="fas fa-trash"></i></button></td>
+      <td>
+        <button class="delete-button" (click)="delete(estudiante.id)"><i class="fas fa-trash"></i></button>
+        <button class="edit-button" (click)="edit(estudiante.id)"><i class="fas fa-pencil-alt"></i></button>
+      </td>
     </tr>
   </tbody>
 </table>

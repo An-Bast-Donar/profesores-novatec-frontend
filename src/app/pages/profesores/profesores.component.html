@@ -17,7 +17,10 @@
       <td>{{ profesor.correo }}</td>
       <td>{{ profesor.especialidad }}</td>
       <td>{{ profesor.fechaContrato }}</td>
-      <td><button class="delete-button" (click)="delete(profesor.id)"><i class="fas fa-trash"></i></button></td>
+      <td>
+        <button class="delete-button" (click)="delete(profesor.id)"><i class="fas fa-trash"></i></button>
+        <button class="edit-button" (click)="edit(profesor.id)"><i class="fas fa-pencil-alt"></i></button>
+      </td>
     </tr>
   </tbody>
 </table>

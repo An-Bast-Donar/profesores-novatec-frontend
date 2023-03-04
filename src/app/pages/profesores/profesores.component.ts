@@ -27,4 +27,7 @@ export class ProfesoresComponent implements OnInit {
       });
     }
   }
+  edit(id: number){
+
+  }
 }

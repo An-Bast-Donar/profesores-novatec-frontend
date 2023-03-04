@@ -27,4 +27,8 @@ export class EstudiantesComponent implements OnInit {
       });
     }
   }
+
+  edit(id: number){
+
+  }
 }
