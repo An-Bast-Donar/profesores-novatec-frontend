@@ -11,6 +11,7 @@ import { ProfesorService } from 'src/app/services/profesor.service';
 })
 export class ProfesoresComponent implements OnInit {
   profesores: Profesor[] = [];
+  profesor: Profesor | undefined;
 
   constructor(private profesorService: ProfesorService, public dialog: MatDialog) {}
 
@@ -32,8 +33,19 @@ export class ProfesoresComponent implements OnInit {
   
   abrirModal(id: number): void {
     const dialogRef = this.dialog.open(ModalProfesorComponent);
+    dialogRef.afterOpened().subscribe(result => {
+      this.buscarProfesor(id);
+      console.log(`Modal abierto: ${result}`);
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Modal cerrado: ${result}`);
+    });
+  }
+
+  buscarProfesor(id: number): void {
+    this.profesorService.findById(id).subscribe((profesor) => {
+      this.profesor = profesor;
+      console.log(this.profesor);
     });
   }
 }

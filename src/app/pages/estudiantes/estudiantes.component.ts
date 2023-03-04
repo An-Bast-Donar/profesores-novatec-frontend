@@ -11,6 +11,7 @@ import { ModalEstudianteComponent } from 'src/app/components/modal-estudiante/mo
 })
 export class EstudiantesComponent implements OnInit {
   estudiantes: Estudiante[] = [];
+  estudiante: Estudiante | undefined;
 
   constructor(private estudianteService: EstudianteService, public dialog: MatDialog) {}
 
@@ -32,8 +33,19 @@ export class EstudiantesComponent implements OnInit {
 
   abrirModal(id: number): void {
     const dialogRef = this.dialog.open(ModalEstudianteComponent);
+    dialogRef.afterOpened().subscribe(result => {
+      this.buscarEstudiante(id);
+      console.log(`Modal abierto: ${result}`);
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Modal cerrado: ${result}`);
+    });
+  }
+
+  buscarEstudiante(id: number): void {
+    this.estudianteService.findById(id).subscribe((estudiante) => {
+      this.estudiante = estudiante;
+      console.log(this.estudiante);
     });
   }
 }
