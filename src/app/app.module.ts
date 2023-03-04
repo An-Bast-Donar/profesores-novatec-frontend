@@ -11,6 +11,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalEstudianteComponent } from './components/modal-estudiante/modal-estudiante.component';
 import { ModalProfesorComponent } from './components/modal-profesor/modal-profesor.component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -19,16 +22,19 @@ import { ModalProfesorComponent } from './components/modal-profesor/modal-profes
     EstudiantesComponent,
     HomeComponent,
     ModalEstudianteComponent,
-    ModalProfesorComponent
+    ModalProfesorComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,3 +1,46 @@
-<h2>Editar profesor</h2>
-<p>Contenido del modal aquí...</p>
-<button mat-button (click)="cerrarModal()">Cerrar</button>
+<div class="form-container">
+    <h2>Editar Profesor</h2>
+    <form class="example-form">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Edad</mat-label>
+                    <input matInput type="number" placeholder="Edad">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput type="email" placeholder="Correo electrónico">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Especialidad</mat-label>
+                    <input matInput placeholder="Especialidad">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label>Fecha Contrato</mat-label>
+                    <input matInput type="date" placeholder="Fecha Contrato">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 button-container">
+                <button mat-raised-button color="primary">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
+</div>
