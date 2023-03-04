@@ -19,7 +19,7 @@
       <td>{{ estudiante.promedio }}</td>
       <td>
         <button class="delete-button" (click)="delete(estudiante.id)"><i class="fas fa-trash"></i></button>
-        <button class="edit-button" (click)="edit(estudiante.id)"><i class="fas fa-pencil-alt"></i></button>
+        <button class="edit-button" (click)="abrirModal(estudiante.id)"><i class="fas fa-pencil-alt"></i></button>
       </td>
     </tr>
   </tbody>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalProfesorComponent } from 'src/app/components/modal-profesor/modal-profesor.component';
 import { Profesor } from 'src/app/models/profesor';
 import { ProfesorService } from 'src/app/services/profesor.service';
 
@@ -10,7 +12,7 @@ import { ProfesorService } from 'src/app/services/profesor.service';
 export class ProfesoresComponent implements OnInit {
   profesores: Profesor[] = [];
 
-  constructor(private profesorService: ProfesorService) {}
+  constructor(private profesorService: ProfesorService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.profesorService.findAll().subscribe((profesores) => {
@@ -27,7 +29,11 @@ export class ProfesoresComponent implements OnInit {
       });
     }
   }
-  edit(id: number){
-
+  
+  abrirModal(id: number): void {
+    const dialogRef = this.dialog.open(ModalProfesorComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Modal cerrado: ${result}`);
+    });
   }
 }
