@@ -11,11 +11,17 @@ import { ModalEstudianteComponent } from 'src/app/components/modal-estudiante/mo
 })
 export class EstudiantesComponent implements OnInit {
   estudiantes: Estudiante[] = [];
-  estudiante: Estudiante | undefined;
 
-  constructor(private estudianteService: EstudianteService, public dialog: MatDialog) {}
+  constructor(
+    private estudianteService: EstudianteService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+    this.buscarEstudiantes();
+  }
+
+  buscarEstudiantes() {
     this.estudianteService.findAll().subscribe((estudiantes) => {
       this.estudiantes = estudiantes;
     });
@@ -31,21 +37,35 @@ export class EstudiantesComponent implements OnInit {
     }
   }
 
-  abrirModal(id: number): void {
-    const dialogRef = this.dialog.open(ModalEstudianteComponent);
-    dialogRef.afterOpened().subscribe(result => {
-      this.buscarEstudiante(id);
-      console.log(`Modal abierto: ${result}`);
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Modal cerrado: ${result}`);
+  buscarEstudiante(id: number): void {
+    this.estudianteService.findById(id).subscribe((estudiante) => {
+      const dialogRef = this.dialog.open(ModalEstudianteComponent, {
+        data: estudiante,
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result != null) {
+          this.actualizarEstudiante(id, result);
+        }
+      });
     });
   }
 
-  buscarEstudiante(id: number): void {
-    this.estudianteService.findById(id).subscribe((estudiante) => {
-      this.estudiante = estudiante;
-      console.log(this.estudiante);
+  actualizarEstudiante(id: number, estudiante: Estudiante): void {
+    this.estudianteService.update(id, estudiante).subscribe(() => {
+      this.buscarEstudiantes();
+      alert('Estudiante modificado exitosamente');
+    });
+  }
+
+  crearEstudiante(): void {
+    const dialogRef = this.dialog.open(ModalEstudianteComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+        this.estudianteService.create(result).subscribe(() => {
+          this.buscarEstudiantes();
+          alert('Estudiante creado exitosamente');
+        });
+      }
     });
   }
 }

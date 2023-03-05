@@ -11,11 +11,17 @@ import { ProfesorService } from 'src/app/services/profesor.service';
 })
 export class ProfesoresComponent implements OnInit {
   profesores: Profesor[] = [];
-  profesor: Profesor | undefined;
 
-  constructor(private profesorService: ProfesorService, public dialog: MatDialog) {}
+  constructor(
+    private profesorService: ProfesorService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+    this.buscarProfesores();
+  }
+
+  buscarProfesores() {
     this.profesorService.findAll().subscribe((profesores) => {
       this.profesores = profesores;
     });
@@ -30,22 +36,37 @@ export class ProfesoresComponent implements OnInit {
       });
     }
   }
-  
-  abrirModal(id: number): void {
-    const dialogRef = this.dialog.open(ModalProfesorComponent);
-    dialogRef.afterOpened().subscribe(result => {
-      this.buscarProfesor(id);
-      console.log(`Modal abierto: ${result}`);
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Modal cerrado: ${result}`);
-    });
-  }
 
   buscarProfesor(id: number): void {
     this.profesorService.findById(id).subscribe((profesor) => {
-      this.profesor = profesor;
-      console.log(this.profesor);
+      const dialogRef = this.dialog.open(ModalProfesorComponent, {
+        data: profesor,
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result != null) {
+          this.actualizarProfesor(id, result);
+        }
+      });
     });
   }
+
+  actualizarProfesor(id: number, estudiante: Profesor): void {
+    this.profesorService.update(id, estudiante).subscribe(() => {
+      this.buscarProfesores();
+      alert('Profesor modificado exitosamente');
+    });
+  }
+
+  crearProfesor(): void {
+    const dialogRef = this.dialog.open(ModalProfesorComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+        this.profesorService.create(result).subscribe(() => {
+          this.buscarProfesores();
+          alert('Profesor creado exitosamente');
+        });
+      }
+    });
+  }
+
 }

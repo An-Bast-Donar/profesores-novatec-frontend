@@ -1,45 +1,66 @@
 <div class="form-container">
-    <h2>Editar Estudiante</h2>
-    <form class="example-form">
+    <h2>{{estadoTitulo}} Estudiante</h2>
+    <form class="example-form" [formGroup]="formulario" (ngSubmit)="guardarCambios()">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 button-container">
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Nombre">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
+                    <mat-error
+                        *ngIf="formulario.get('nombre')?.invalid && (formulario.get('nombre')?.dirty || formulario.get('nombre')?.touched)">
+                        Nombre es requerido
+                    </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 button-container">
                 <mat-form-field>
                     <mat-label>Edad</mat-label>
-                    <input matInput type="number" placeholder="Edad">
+                    <input matInput type="number" placeholder="Edad" formControlName="edad">
+                    <mat-error
+                        *ngIf="formulario.get('edad')?.invalid && (formulario.get('edad')?.dirty || formulario.get('edad')?.touched)">
+                        Edad es requerida
+                    </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 button-container">
                 <mat-form-field>
                     <mat-label>Correo electrónico</mat-label>
-                    <input matInput type="email" placeholder="Correo electrónico">
+                    <input matInput type="email" placeholder="Correo electrónico" formControlName="correoElectronico">
+                    <mat-error
+                        *ngIf="formulario.get('correoElectronico')?.invalid && (formulario.get('correoElectronico')?.dirty || formulario.get('correoElectronico')?.touched)">
+                        Correo debe ser valido
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 button-container">
                 <mat-form-field>
                     <mat-label>Carrera</mat-label>
-                    <input matInput placeholder="Carrera">
+                    <input matInput placeholder="Carrera" formControlName="carrera">
+                    <mat-error
+                        *ngIf="formulario.get('carrera')?.invalid && (formulario.get('carrera')?.dirty || formulario.get('carrera')?.touched)">
+                        Carrera es requerida
+                    </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 button-container">
                 <mat-form-field>
                     <mat-label>Promedio</mat-label>
-                    <input matInput type="number" placeholder="Promedio">
+                    <input matInput type="number" placeholder="Promedio" formControlName="promedio">
+                    <mat-error
+                        *ngIf="formulario.get('promedio')?.invalid && (formulario.get('promedio')?.dirty || formulario.get('promedio')?.touched)">
+                        Promedio es requerido
+                    </mat-error>
                 </mat-form-field>
             </div>
+
             <div class="col-md-4 button-container">
-                <button mat-raised-button color="primary">Guardar cambios</button>
+                <button mat-raised-button color="primary" type="submit">{{estadoBoton}}</button>
             </div>
         </div>
     </form>
